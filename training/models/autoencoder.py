@@ -3,9 +3,7 @@ import os
 import time
 from tqdm import tqdm
 
-from utils import Logger
-from encoder import Encoder
-from decoder import Decoder
+from models.utils import Logger
 
 
 class Autoencoder(tf.keras.Model):
