@@ -6,11 +6,11 @@ This repository contains the code for training two text autoencoders (English an
 
 ## Pre-requisites
 
-In order to run the training program, it is recommended to use Python **>=3.8**.
+In order to run the training program, it is recommended to use **Python >=3.8**.
 
 Additionally, the following libraries must be installed:
 
-* tensorflow >= 2.*
+* **tensorflow >= 2.***
 
 * nltk
 
@@ -48,23 +48,26 @@ Custom parameters can be specified in the command
 line as arguments, in the following format:
 
 ```commandline
-python main.py [-h] [-se SEED] [-ru RNNUNITS] [-eb EMBDIM] [-bs BATCHSIZE]
-               [-lr LEARNINGRATE] [-ep EPOCHS] [-ck CKPTDIR]
+python train.py [-h] [-se SEED] [-bs BATCHSIZE] [-st] [-ru RNNUNITS]
+                [-eb EMBDIM] [-lr LEARNINGRATE] [-ep EPOCHS] [-ck CKPTDIR]
+
+Train an English and Spanish text autoencoder.
 
 optional arguments:
   -h, --help            show this help message and exit
   -se SEED, --seed SEED
-                        Random seed
-  -ru RNNUNITS, --rnnunits RNNUNITS
-                        RNN units
-  -eb EMBDIM, --embdim EMBDIM
-                        Embedding dimensions
+                        Random seed (int)
   -bs BATCHSIZE, --batchsize BATCHSIZE
-                        Batch size
+                        Batch size (int)
+  -st, --stem           Stem words in preprocessing? (boolean)
+  -ru RNNUNITS, --rnnunits RNNUNITS
+                        Number of RNN units (int)
+  -eb EMBDIM, --embdim EMBDIM
+                        Embedding dimensions (int)
   -lr LEARNINGRATE, --learningrate LEARNINGRATE
-                        Initial learning rate
+                        Initial learning rate (float)
   -ep EPOCHS, --epochs EPOCHS
-                        Number of epochs
+                        Number of epochs (int)
   -ck CKPTDIR, --ckptdir CKPTDIR
                         Checkpoint directory
 ```

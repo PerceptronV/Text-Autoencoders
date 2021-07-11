@@ -13,12 +13,13 @@ if __name__ == '__main__':
   parser = argparse.ArgumentParser(
     description='Train an English and Spanish text autoencoder.')
 
-  parser.add_argument('-se', '--seed', type=int, default=7799, help="Random seed")
-  parser.add_argument('-ru', '--rnnunits', type=int, default=512, help="RNN units")
-  parser.add_argument('-eb', '--embdim', type=int, default=256, help="Embedding dimensions")
-  parser.add_argument('-bs', '--batchsize', type=int, default=64, help="Batch size")
-  parser.add_argument('-lr', '--learningrate', type=int, default=1e-3, help="Initial learning rate")
-  parser.add_argument('-ep', '--epochs', type=int, default=32, help="Number of epochs")
+  parser.add_argument('-se', '--seed', type=int, default=7799, help="Random seed (int)")
+  parser.add_argument('-bs', '--batchsize', type=int, default=64, help="Batch size (int)")
+  parser.add_argument('-st', '--stem', action='store_true', help='Stem words in preprocessing? (boolean)')
+  parser.add_argument('-ru', '--rnnunits', type=int, default=512, help="Number of RNN units (int)")
+  parser.add_argument('-eb', '--embdim', type=int, default=256, help="Embedding dimensions (int)")
+  parser.add_argument('-lr', '--learningrate', type=int, default=1e-3, help="Initial learning rate (float)")
+  parser.add_argument('-ep', '--epochs', type=int, default=32, help="Number of epochs (int)")
   parser.add_argument('-ck', '--ckptdir', type=str, default='./.ckpts/', help="Checkpoint directory")
 
   args = parser.parse_args()
@@ -46,7 +47,7 @@ if __name__ == '__main__':
 
   (sp_train_dataset, sp_val_dataset, en_train_dataset, en_val_dataset,
    sp_tensor_train, en_tensor_train, vocab_sp_size, vocab_en_size,
-   sp_lang, en_lang, steps_per_epoch) = load_data(PARAMS['BATCH_SIZE'], PARAMS['RAND_SEED'])
+   sp_lang, en_lang, steps_per_epoch) = load_data(PARAMS['BATCH_SIZE'], PARAMS['RAND_SEED'], args.stem)
 
 
   # Initialising models

@@ -30,7 +30,7 @@ def unicode_to_ascii(s):
                  if unicodedata.category(c) != 'Mn')
 
 
-def preprocess_sentence(w, lang, stem=False):
+def preprocess_sentence(w, lang, stem):
   if lang == 'en':
     stemmer = nltk.stem.snowball.SnowballStemmer("english")
   elif lang == 'sp':
@@ -61,7 +61,7 @@ def preprocess_sentence(w, lang, stem=False):
 # 1. Remove the accents
 # 2. Clean the sentences
 # 3. Return word pairs in the format: [ENGLISH, SPANISH]
-def create_dataset(path, stem=False):
+def create_dataset(path, stem):
   map = {0: 'en', 1: 'sp'}
 
   lines = io.open(path, encoding='UTF-8').read().strip().split('\n')
@@ -89,9 +89,9 @@ def tokenize(lang):
   return tensor, lang_tokenizer
 
 
-def load_dataset(path, num_examples=None):
+def load_dataset(path, num_examples=None, stem=False):
   # creating cleaned input, output pairs
-  targ_lang, inp_lang = create_dataset(path)
+  targ_lang, inp_lang = create_dataset(path, stem)
 
   input_tensor, inp_lang_tokenizer = tokenize(inp_lang)
   target_tensor, targ_lang_tokenizer = tokenize(targ_lang)
@@ -107,14 +107,14 @@ def to_tfds(input_tensor, label_tensor, buffer_sz, batch_sz, rand_seed):
   ).batch(batch_sz, drop_remainder=True)
 
 
-def load_data(batch_sz, rand_seed):
+def load_data(batch_sz, rand_seed, stem):
   path_to_zip = tf.keras.utils.get_file(
     'spa-eng.zip', origin='http://storage.googleapis.com/download.tensorflow.org/data/spa-eng.zip',
     extract=True)
 
   path_to_file = os.path.dirname(path_to_zip) + "/spa-eng/spa.txt"
 
-  sp_tensor, en_tensor, sp_lang, en_lang = load_dataset(path_to_file)
+  sp_tensor, en_tensor, sp_lang, en_lang = load_dataset(path_to_file, stem)
 
   # Calculate max_length of the target tensors
   max_length_en, max_length_sp = en_tensor.shape[1], sp_tensor.shape[1]
