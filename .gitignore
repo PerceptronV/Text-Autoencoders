@@ -1,6 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
-train/__pycache__/
+training/__pycache__/
 models/__pycache__/
 *.py[cod]
 *$py.class
@@ -119,5 +119,5 @@ dmypy.json
 .idea/
 
 # Training checkpoints
-train/.ckpts/
+training/.ckpts/
 
