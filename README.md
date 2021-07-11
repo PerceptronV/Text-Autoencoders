@@ -51,8 +51,6 @@ line as arguments, in the following format:
 python train.py [-h] [-se SEED] [-bs BATCHSIZE] [-st] [-ru RNNUNITS]
                 [-eb EMBDIM] [-lr LEARNINGRATE] [-ep EPOCHS] [-ck CKPTDIR]
 
-Train an English and Spanish text autoencoder.
-
 optional arguments:
   -h, --help            show this help message and exit
   -se SEED, --seed SEED
